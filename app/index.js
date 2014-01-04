@@ -24,15 +24,23 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
 
     var prompts = [
         {
-            type: 'confirm',
-            name: 'someOption',
-            message: 'Would you like to enable this option?',
-            default: true
+            name: 'gitUser',
+            message: 'What is your GitHub user name?'
+        },
+        {
+            name: 'appName',
+            message: 'What do you want to call your application?'
+        },
+        {
+            name: 'appDescription',
+            message: 'What will your application do?'
         }
     ];
 
     this.prompt(prompts, function (props) {
-        this.someOption = props.someOption;
+        this.appName = props.appName;
+        this.appDescription = props.appDescription;
+        this.gitUser = props.gitUser;
 
         cb();
     }.bind(this));
