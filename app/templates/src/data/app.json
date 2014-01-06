@@ -1,0 +1,6 @@
+{
+    "name": "<%= _.slugify(appName) %>",
+    "description": "<%= _.slugify(appDescription) %>",
+    "scripts": ["<%= _.slugify(appName) %>.js"],
+    "styles": ["<%= _.slugify(appName) %>.css"]
+}

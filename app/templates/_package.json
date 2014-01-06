@@ -37,6 +37,7 @@
         "grunt-contrib-less": "~0.8.3",
         "grunt-autoprefixer": "~0.6.3",
         "grunt-lesslint": "~0.15.0",
-        "grunt-release": "~0.6.0"
+        "grunt-release": "~0.6.0",
+        "grunt-gh-pages": "~0.8.1"
     }
 }
