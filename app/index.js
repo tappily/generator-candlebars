@@ -68,7 +68,7 @@ CandlebarsGenerator.prototype.sources = function sources() {
     this.copy('src/less/main.less', 'src/less/main.less');
     this.copy('src/less/welcome.less', 'src/less/welcome.less');
     this.copy('src/template/layout/default.hbs', 'src/template/layout/default.hbs');
-    this.copy('src/template/page/index.hbs', 'src/template/page/index.hbs');
+    this.copy('src/template/page/_index.hbs', 'src/template/page/index.hbs');
     this.copy('src/template/partial/header.hbs', 'src/template/partial/header.hbs');
     this.copy('src/template/partial/salutation.hbs', 'src/template/partial/salutation.hbs');
 };
