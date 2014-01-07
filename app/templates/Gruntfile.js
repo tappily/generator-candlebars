@@ -168,9 +168,13 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('build', ['clean', 'jshint', 'less', 'autoprefixer', 'requirejs']);
+    grunt.registerTask('test', ['jshint', 'lesslint']);
 
-    grunt.registerTask('live', ['build', 'assemble', 'copy', 'connect:app', 'watch']);
+    grunt.registerTask('build', ['clean', 'test', 'less', 'autoprefixer', 'requirejs']);
 
-    grunt.registerTask('deploy', ['build', 'gh-pages']);
+    grunt.registerTask('site', ['build', 'assemble', 'copy']);
+
+    grunt.registerTask('live', ['site', 'connect:app', 'watch']);
+
+    grunt.registerTask('deploy', ['site', 'gh-pages']);
 };
