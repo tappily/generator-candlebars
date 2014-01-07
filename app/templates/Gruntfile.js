@@ -9,7 +9,7 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         assemble: {
             options: {
-                assets: 'dist/<%%= pkg.name %>/asset',
+                assets: '<%%= connect.app.options.base %>/asset',
                 data: ['bower.json'],
                 layoutdir: 'src/template/layout',
                 partials: 'src/template/partial/*.hbs'
@@ -21,13 +21,14 @@ module.exports = function (grunt) {
                     flatten: true
                 },
                 files: {
-                    'dist/<%%= pkg.name %>/': ['src/template/page/*.hbs']
+                    '<%%= connect.app.options.base %>/': ['src/template/page/*.hbs']
                 }
             }
         },
         autoprefixer: {
-            dist: {
-                src: 'dist/css/*.css'
+            less: {
+                src: '.grunt/less/*.css',
+                dest: 'dist/css/<%%= pkg.name %>.css'
             }
         },
         bower: {
@@ -39,12 +40,13 @@ module.exports = function (grunt) {
             }
         },
         clean: {
+            temp: ['.grunt'],
             dist: ['dist']
         },
         connect: {
             app: {
                 options: {
-                    base: ['dist/<%%= pkg.name %>'],
+                    base: '.grunt/connect/<%%= pkg.name %>',
                     livereload: true,
                     open: true
                 }
@@ -57,7 +59,7 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: 'dist/',
                         src: ['js/**'],
-                        dest: 'dist/<%%= pkg.name %>/asset/',
+                        dest: '<%%= connect.app.options.base %>/asset/',
                         filter: 'isFile'
                     }
                 ]
@@ -68,7 +70,7 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: 'dist/',
                         src: ['css/**'],
-                        dest: 'dist/<%%= pkg.name %>/asset/',
+                        dest: '<%%= connect.app.options.base %>/asset/',
                         filter: 'isFile'
                     }
                 ]
@@ -79,7 +81,7 @@ module.exports = function (grunt) {
                         expand: true,
                         cwd: 'src/asset',
                         src: ['img/**'],
-                        dest: 'dist/<%%= pkg.name %>/asset/',
+                        dest: '<%%= connect.app.options.base %>/asset/',
                         filter: 'isFile'
                     }
                 ]
@@ -87,7 +89,7 @@ module.exports = function (grunt) {
         },
         'gh-pages': {
             options: {
-                base: 'dist/<%%= pkg.name %>'
+                base: '<%%= connect.app.options.base %>'
             },
             src: '**/*'
         },
@@ -112,7 +114,7 @@ module.exports = function (grunt) {
                     strictMath: true
                 },
                 files: {
-                    'dist/css/<%%= pkg.name %>.css': 'src/less/main.less'
+                    '.grunt/less/<%%= pkg.name %>.css': 'src/less/main.less'
                 }
             }
         },
@@ -146,7 +148,7 @@ module.exports = function (grunt) {
         },
         watch: {
             assets: {
-                files: ['dist/<%%= pkg.name %>/asset/**'],
+                files: ['<%%= assemble.options.assets %>/**'],
                 options: {
                     livereload: true
                 }
@@ -166,9 +168,9 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('build', ['clean', 'jshint', 'less', 'autoprefixer', 'requirejs', 'assemble', 'copy']);
+    grunt.registerTask('build', ['clean', 'jshint', 'less', 'autoprefixer', 'requirejs']);
 
-    grunt.registerTask('live', ['build', 'connect:app', 'watch']);
+    grunt.registerTask('live', ['build', 'assemble', 'copy', 'connect:app', 'watch']);
 
     grunt.registerTask('deploy', ['build', 'gh-pages']);
 };
