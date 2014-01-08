@@ -44,6 +44,9 @@ module.exports = function (grunt) {
             dist: ['dist']
         },
         connect: {
+            options: {
+                hostname: grunt.option('connect-hostname') || 'localhost'
+            },
             app: {
                 options: {
                     base: '.grunt/connect/<%%= pkg.name %>',
