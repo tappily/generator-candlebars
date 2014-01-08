@@ -1,10 +1,10 @@
 {
     "name": "<%= _.slugify(appName) %>",
-    "version": "0.0.0",
-    "homepage": "https://github.com/<%= _.slugify(gitUser) %>/<%= _.slugify(appName) %>",
-    "authors": [
+    "version": "0.0.0",<% if (validGit){ %>
+    "homepage": "<%= git %>/<%= _.slugify(gitUser) %>/<%= _.slugify(appName) %>",
+    <% } %><% if (gitUser){ %>"authors": [
         "<%= _.slugify(gitUser) %>"
-    ],
+    ],<% } %>
     "description": "<%= appDescription %>",
     "main": "Gruntfile.js",
     "keywords": [

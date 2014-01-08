@@ -1,3 +1,4 @@
-require(['welcome'], function(welcome) {
+require([], function () {
     'use strict';
+    // do stuff
 });
