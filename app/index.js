@@ -111,7 +111,6 @@ CandlebarsGenerator.prototype.sources = function sources() {
     this.copy('src/template/layout/default.hbs', 'src/template/layout/default.hbs');
     this.copy('src/template/page/_index.hbs', 'src/template/page/index.hbs');
     this.copy('src/template/partial/header.hbs', 'src/template/partial/header.hbs');
-    this.copy('src/template/partial/salutation.hbs', 'src/template/partial/salutation.hbs');
 };
 
 CandlebarsGenerator.prototype.welcome = function welcome() {
@@ -120,6 +119,7 @@ CandlebarsGenerator.prototype.welcome = function welcome() {
         this.copy('src/less/welcome.less', 'src/less/main.less');
         this.copy('src/less/welcome/salutation.less', 'src/less/welcome/salutation.less');
         this.copy('src/js/welcome/control/host.js', 'src/js/welcome/control/host.js');
+        this.copy('src/template/partial/salutation.hbs', 'src/template/partial/salutation.hbs');
         this.copy('src/js/welcome/model/salutation.js', 'src/js/welcome/model/salutation.js');
         this.copy('src/js/welcome/view/salutation.js', 'src/js/welcome/view/salutation.js');
         this.copy('src/js/nls/salutation.js', 'src/js/nls/salutation.js');
