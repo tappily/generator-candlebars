@@ -1,4 +1,4 @@
-# generator-candlebars [![Build Status](https://secure.travis-ci.org/tappily/generator-candlebars.png?branch=master)](https://travis-ci.org/tappily/generator-candlebars)
+# generator-candlebars
 
 A generator for [Yeoman](http://yeoman.io).
 
