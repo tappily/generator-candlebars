@@ -1,5 +1,5 @@
 {
-    "name": "<%= _.slugify(appName) %>",
+    "name": "<%= _.humanize(appName) %>",
     "description": "<%= _.stripTags(appDescription) %>",
     "scripts": ["<%= _.slugify(appName) %>.js"],
     "styles": ["<%= _.slugify(appName) %>.css"]

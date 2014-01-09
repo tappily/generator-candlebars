@@ -1,4 +1,3 @@
----
-title: <%= _.humanize(appName) %>
----
-<section data-host></section>
+<% if (installWelcome){ %><section data-host></section>
+<% } else { %><section></section>
+<% } %>
