@@ -134,6 +134,11 @@ module.exports = function (grunt) {
                 src: ['src/less/main.less']
             }
         },
+        release: {
+            options: {
+                file: 'bower.json'
+            }
+        },
         requirejs: {
             options: {
                 baseUrl: 'src/js',

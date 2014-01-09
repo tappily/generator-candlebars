@@ -6,7 +6,7 @@
         "<%= _.slugify(gitUser) %>"
     ],<% } %>
     "description": "<%= appDescription %>",
-    "main": "Gruntfile.js",
+    "main": "dist/js/<%= _.slugify(appName) %>.js",
     "keywords": [
         "javascript",
         "canjs",
