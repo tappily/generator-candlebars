@@ -32,6 +32,23 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
             message: 'Description?'
         },
         {
+            name: 'features',
+            message: 'Features?',
+            type: 'checkbox',
+            choices: [
+                {
+                    name: 'Normalize css',
+                    value: 'installNormalize',
+                    checked: true
+                },
+                {
+                    name: 'Flexbox grid',
+                    value: 'installFlexBoxGrid',
+                    checked: true
+                }
+            ]
+        },
+        {
             name: 'demos',
             message: 'Demo modules?',
             type: 'checkbox',
@@ -83,7 +100,8 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
         this.git = props.git;
 
         this.validGit = !(/none/).test(this.git) && this.appName && this.gitUser.length > 0;
-
+        this.installNormalize = props.features.indexOf('installNormalize') > -1;
+        this.installFlexBoxGrid = props.features.indexOf('installFlexBoxGrid') > -1;
         this.installWelcome = props.demos.indexOf('installWelcome') > -1;
         cb();
     }.bind(this));

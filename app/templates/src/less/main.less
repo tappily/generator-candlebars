@@ -1,1 +1,4 @@
-@import (less) "../../bower_components/normalize-css/normalize.css";
+<% if (installNormalize){ %>
+@import (less) "../../bower_components/normalize-css/normalize.css";<% } %><% if (installFlexBoxGrid){ %>
+@import (less) "../../bower_components/flexboxgrid/css/flexboxgrid.css";
+<% } %>
