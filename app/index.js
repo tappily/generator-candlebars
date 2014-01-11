@@ -133,13 +133,14 @@ CandlebarsGenerator.prototype.sources = function sources() {
 
 CandlebarsGenerator.prototype.welcome = function welcome() {
     if (this.installWelcome) {
-        this.copy('src/js/welcome.js', 'src/js/main.js');
+        this.copy('src/js/main-welcome.js', 'src/js/main.js');
+        this.copy('src/js/welcome.js', 'src/js/welcome.js');
         this.copy('src/less/welcome.less', 'src/less/main.less');
         this.copy('src/less/welcome/salutation.less', 'src/less/welcome/salutation.less');
-        this.copy('src/js/welcome/control/host.js', 'src/js/welcome/control/host.js');
+        this.copy('src/js/welcome.js', 'src/js/welcome.js');
         this.copy('src/template/partial/salutation.hbs', 'src/template/partial/salutation.hbs');
-        this.copy('src/js/welcome/model/salutation.js', 'src/js/welcome/model/salutation.js');
-        this.copy('src/js/welcome/view/salutation.js', 'src/js/welcome/view/salutation.js');
+        this.copy('src/js/welcome/model.js', 'src/js/welcome/model.js');
+        this.copy('src/js/welcome/view.js', 'src/js/welcome/view.js');
         this.copy('src/js/nls/salutation.js', 'src/js/nls/salutation.js');
         this.copy('src/js/nls/en-us/salutation.js', 'src/js/nls/en-us/salutation.js');
         this.copy('src/js/nls/fr-fr/salutation.js', 'src/js/nls/fr-fr/salutation.js');

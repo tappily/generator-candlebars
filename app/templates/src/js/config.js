@@ -6,8 +6,6 @@ require.config({
         canjs: '../../bower_components/canjs/can.jquery',
         jquery: '../../bower_components/jquery/jquery',
         'requirejs-i18n': '../../bower_components/requirejs-i18n/i18n',
-        'requirejs-text': '../../bower_components/requirejs-text/text',
-        data: '../data',
-        template: '../template'
+        'requirejs-text': '../../bower_components/requirejs-text/text'
     }
 });
