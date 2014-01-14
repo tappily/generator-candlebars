@@ -12,7 +12,7 @@
     "email": "",
     "url": "https://github.com/tappily"
   },
-  "main": "app/index.js",
+  "main": "app/_index.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/tappily/generator-candlebars.git"

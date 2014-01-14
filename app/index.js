@@ -49,17 +49,6 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
             ]
         },
         {
-            name: 'demos',
-            message: 'Demo modules?',
-            type: 'checkbox',
-            choices: [
-                {
-                    name: 'Welcome',
-                    value: 'installWelcome'
-                }
-            ]
-        },
-        {
             name: 'git',
             message: 'Version control?',
             type: 'list',
@@ -89,20 +78,29 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
                 return !(/none/).test(answers.git);
             },
             name: 'gitUser',
-            message: 'Username/organization?'
+            message: 'Username/organization?',
+            default: this.user.git.username
         }
     ];
 
     this.prompt(prompts, function (props) {
-        this.appName = props.appName;
-        this.appDescription = props.appDescription;
-        this.gitUser = props.gitUser;
-        this.git = props.git;
+        this.appTitle = this._.humanize(props.appName);
+        this.appName = this._.slugify(props.appName);
+        this.appDescription = this._.stripTags(props.appDescription);
+        this.gitUser = this._.slugify(props.gitUser) || '';
+        this.git = props.git || '';
 
-        this.validGit = !(/none/).test(this.git) && this.appName && this.gitUser.length > 0;
+        if (!(/none/).test(this.git) && this.appName && this.gitUser.length > 0) {
+            this.gitHome = ''.concat(props.git, '/', this.gitUser, '/', this.appName);
+            this.gitRepo = this.gitHome.concat('.git');
+            this.gitBugs = this.gitHome.concat('/issues');
+
+        } else {
+            this.gitHome = this.gitRepo = this.gitBugs = '';
+        }
+
         this.installNormalize = props.features.indexOf('installNormalize') > -1;
         this.installFlexBoxGrid = props.features.indexOf('installFlexBoxGrid') > -1;
-        this.installWelcome = props.demos.indexOf('installWelcome') > -1;
         cb();
     }.bind(this));
 };
@@ -118,33 +116,32 @@ CandlebarsGenerator.prototype.projectfiles = function projectfiles() {
     this.copy('jshintrc', '.jshintrc');
 };
 
-CandlebarsGenerator.prototype.sources = function sources() {
+CandlebarsGenerator.prototype.scripts = function scripts() {
     this.mkdir('src/asset');
     this.copy('src/data/app.json', 'src/data/app.json');
-    if (!this.installWelcome) {
-        this.copy('src/js/main.js', 'src/js/main.js');
-        this.copy('src/less/main.less', 'src/less/main.less');
-    }
+
+    this.copy('src/js/_index.js', 'src/js/index.js');
+    this.copy('src/js/app.js', 'src/js/'.concat(this.appName, '.js'));
+    this.mkdir('src/js/'.concat(this.appName));
+
     this.copy('src/js/config.js', 'src/js/config.js');
-    this.copy('src/template/layout/default.hbs', 'src/template/layout/default.hbs');
-    this.copy('src/template/page/_index.hbs', 'src/template/page/index.hbs');
-    this.copy('src/template/partial/header.hbs', 'src/template/partial/header.hbs');
+
+    this.copy('src/less/_app.less', 'src/less/'.concat(this.appName, '.less'));
+    this.copy('src/less/app/_config.less', 'src/less/'.concat(this.appName, '/config.less'));
+
+    this.bulkDirectory('src/template', 'src/template');
 };
 
-CandlebarsGenerator.prototype.welcome = function welcome() {
-    if (this.installWelcome) {
-        this.copy('src/js/main-welcome.js', 'src/js/main.js');
-        this.copy('src/js/welcome.js', 'src/js/welcome.js');
-        this.copy('src/less/welcome.less', 'src/less/main.less');
-        this.copy('src/less/welcome/salutation.less', 'src/less/welcome/salutation.less');
-        this.copy('src/js/welcome.js', 'src/js/welcome.js');
-        this.copy('src/template/partial/salutation.hbs', 'src/template/partial/salutation.hbs');
-        this.copy('src/js/welcome/model.js', 'src/js/welcome/model.js');
-        this.copy('src/js/welcome/view.js', 'src/js/welcome/view.js');
-        this.copy('src/js/nls/salutation.js', 'src/js/nls/salutation.js');
-        this.copy('src/js/nls/en-us/salutation.js', 'src/js/nls/en-us/salutation.js');
-        this.copy('src/js/nls/fr-fr/salutation.js', 'src/js/nls/fr-fr/salutation.js');
-    }
+CandlebarsGenerator.prototype.demo = function welcome() {
+
+    this.copy('src/less/_index.less', 'src/less/index.less');
+
+    this.copy('src/less/demo.less', 'src/less/demo.less');
+    this.copy('src/less/demo/config.less', 'src/less/demo/config.less');
+
+    this.copy('src/js/demo.js', 'src/js/demo.js');
+    this.bulkDirectory('src/js/demo', 'src/js/demo');
+    this.bulkDirectory('src/js/nls', 'src/js/nls');
 };
 
 CandlebarsGenerator.prototype.runtime = function runtime() {

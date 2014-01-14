@@ -1,12 +1,12 @@
 {
-    "name": "<%= _.slugify(appName) %>",
-    "version": "0.0.0",<% if (validGit){ %>
-    "homepage": "<%= git %>/<%= _.slugify(gitUser) %>/<%= _.slugify(appName) %>",
-    <% } %><% if (gitUser){ %>"authors": [
-        "<%= _.slugify(gitUser) %>"
-    ],<% } %>
+    "name": "<%= appName %>",
+    "version": "0.0.0",
+    "homepage": "<%= gitHome %>",
+    "authors": [
+        "<%= gitUser %>"
+    ],
     "description": "<%= appDescription %>",
-    "main": "dist/js/<%= _.slugify(appName) %>.js",
+    "main": "dist/js/<%= appName %>.js",
     "keywords": [
         "javascript",
         "canjs",

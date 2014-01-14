@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         bower: {
             all: {
                 options: {
-                    exclude: ['normalize-css']
+                    exclude: ['normalize-css', 'flexboxgrid']
                 },
                 rjsConfig: 'src/js/config.js'
             }
@@ -111,13 +111,23 @@ module.exports = function (grunt) {
             }
         },
         less: {
-            develop: {
-                options: {
-                    strictUnits: true,
-                    strictMath: true
-                },
+            options: {
+                strictUnits: true,
+                strictMath: true
+            },
+            all: {
                 files: {
-                    '.grunt/less/<%%= pkg.name %>.css': 'src/less/main.less'
+                    '.grunt/less/all.css': 'src/less/index.less'
+                }
+            },
+            app: {
+                files: {
+                    '.grunt/less/<%%= pkg.name %>.css': 'src/less/<%%= pkg.name %>.less'
+                }
+            },
+            demo: {
+                files: {
+                    '.grunt/less/demo.css': 'src/less/demo.less'
                 }
             }
         },
@@ -130,8 +140,14 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            main: {
-                src: ['src/less/main.less']
+            all: {
+                src: ['src/less/index.less']
+            },
+            app: {
+                src: ['src/less/<%%= pkg.name %>.less']
+            },
+            demo: {
+                src: ['src/less/demo.less']
             }
         },
         release: {
@@ -146,11 +162,25 @@ module.exports = function (grunt) {
                 mainConfigFile: 'src/js/config.js',
                 name: 'almond'
             },
-            combine: {
+            all: {
                 options: {
                     optimize: 'none',
-                    include: ['main'],
+                    include: ['index'],
+                    out: 'dist/js/index.js'
+                }
+            },
+            app: {
+                options: {
+                    optimize: 'none',
+                    include: ['<%%= pkg.name %>'],
                     out: 'dist/js/<%%= pkg.name %>.js'
+                }
+            },
+            demo: {
+                options: {
+                    optimize: 'none',
+                    include: ['demo'],
+                    out: 'dist/js/demo.js'
                 }
             }
         },
@@ -163,24 +193,26 @@ module.exports = function (grunt) {
             },
             less: {
                 files: 'src/less/**/*.less',
-                tasks: ['lesslint', 'less', 'autoprefixer', 'copy:css']
+                tasks: ['lesslint', 'less:all', 'autoprefixer', 'copy:css']
             },
             js: {
                 files: ['src/js/**/*.js'],
-                tasks: ['requirejs:combine', 'copy:js']
+                tasks: ['requirejs:all', 'copy:js']
             },
             template: {
                 files: ['src/template/**/*.hbs'],
-                tasks: ['requirejs:combine', 'assemble', 'copy']
+                tasks: ['requirejs:all', 'assemble', 'copy']
             }
         }
     });
 
-    grunt.registerTask('test', ['jshint', 'lesslint']);
+    grunt.registerTask('default', ['bower']);
 
-    grunt.registerTask('build', ['clean', 'test', 'less', 'autoprefixer', 'requirejs']);
+    grunt.registerTask('test', ['jshint', 'lesslint:all']);
 
-    grunt.registerTask('site', ['build', 'assemble', 'copy']);
+    grunt.registerTask('build', ['clean', 'jshint', 'lesslint:app', 'less:app', 'autoprefixer', 'requirejs:app']);
+
+    grunt.registerTask('site', ['clean', 'jshint', 'lesslint:all', 'less:all', 'autoprefixer', 'requirejs:all', 'assemble', 'copy']);
 
     grunt.registerTask('live', ['site', 'connect:app', 'watch']);
 

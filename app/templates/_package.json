@@ -1,26 +1,26 @@
 {
-    "name": "<%= _.slugify(appName) %>",
+    "name": "<%= appName %>",
     "version": "0.0.0",
     "description": "<%= appDescription %>",
     "main": "Gruntfile.js",
     "scripts": {
         "test": "grunt test"
-    },<% if (validGit){ %>
+    },
     "repository": {
         "type": "git",
-        "url": "<%= git %>/<%= _.slugify(gitUser) %>/<%= _.slugify(appName) %>.git"
-    },<% } %>
+        "url": "<%= gitRepo %>"
+    },
     "keywords": [
         "Javascript",
         "CanJS",
         "Handlebars"
-    ],<% if (validGit){ %>
-    "author": "<%= _.slugify(gitUser) %>",<% } %>
-    "license": "MIT",<% if (validGit){ %>
+    ],
+    "author": "<%= gitUser %>",
+    "license": "MIT",
     "bugs": {
-        "url": "<%= git %>/<%= _.slugify(gitUser) %>/<%= _.slugify(appName) %>/issues"
+        "url": "<%= gitBugs %>"
     },
-    "homepage": "<%= git %>/<%= _.slugify(gitUser) %>/<%= _.slugify(appName) %>",<% } %>
+    "homepage": "<%= gitHome %>",
     "dependencies": {},
     "devDependencies": {
         "grunt": "~0.4.2",
