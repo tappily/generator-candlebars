@@ -46,11 +46,6 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
             type: 'checkbox',
             choices: [
                 {
-                    name: 'CanJS',
-                    value: 'installCanJs',
-                    checked: true
-                },
-                {
                     name: 'jQuery',
                     value: 'installJQuery',
                     checked: true
@@ -64,10 +59,6 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
                     name: 'Normalize css',
                     value: 'installNormalize',
                     checked: true
-                },
-                {
-                    name: 'Zurb Foundation',
-                    value: 'installFoundation'
                 }
             ]
         },
@@ -124,7 +115,6 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
 
         this.installNormalize = props.features.indexOf('installNormalize') > -1;
         this.installFlexBoxGrid = props.features.indexOf('installFlexBoxGrid') > -1;
-        this.installFoundation = props.features.indexOf('installFoundation') > -1;
         this.installCanJs = props.features.indexOf('installCanJs') > -1;
         this.installJQuery = props.features.indexOf('installJQuery') > -1;
         cb();

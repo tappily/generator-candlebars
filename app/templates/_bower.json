@@ -23,13 +23,12 @@
     ],
     "dependencies": {
         "almond": "~0.2.7",
+        "canjs": "~2.0.4",
         "requirejs-i18n": "~2.0.4",
         "requirejs-text": "~2.0.10"<% if (installJQuery){ %>,
         "jquery": "~2.0.3"<% } %><% if (installNormalize){ %>,
-        "normalize-css": "~2.1.3"<% } %><% if (installCanJs){ %>,
-        "canjs": "~2.0.4"<% } %><% if (installFlexBoxGrid){ %>,
-        "flexboxgrid": "https://github.com/kristoferjoseph/flexboxgrid.git#~0.1.0"<% } %><% if (installFoundation){ %>,
-        "foundation": "~5.0.2"<% } %>
+        "normalize-css": "~2.1.3"<% } %><% if (installFlexBoxGrid){ %>,
+        "flexboxgrid": "https://github.com/kristoferjoseph/flexboxgrid.git#~0.1.0"<% } %>
     }
 }
 
