@@ -8,7 +8,16 @@ var CandlebarsGenerator = module.exports = function CandlebarsGenerator(args, op
     yeoman.generators.Base.apply(this, arguments);
 
     this.on('end', function () {
-        this.installDependencies({ skipInstall: options['skip-install'] });
+        this.installDependencies({
+            skipInstall: options['skip-install'],
+            callback: function () {
+                this.emit('dependenciesInstalled');
+            }.bind(this)
+        });
+    });
+
+    this.on('dependenciesInstalled', function () {
+        this.spawnCommand('grunt', ['bower']);
     });
 
     this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, '../package.json')));
@@ -37,14 +46,28 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
             type: 'checkbox',
             choices: [
                 {
-                    name: 'Normalize css',
-                    value: 'installNormalize',
+                    name: 'CanJS',
+                    value: 'installCanJs',
+                    checked: true
+                },
+                {
+                    name: 'jQuery',
+                    value: 'installJQuery',
                     checked: true
                 },
                 {
                     name: 'Flexbox grid',
                     value: 'installFlexBoxGrid',
                     checked: true
+                },
+                {
+                    name: 'Normalize css',
+                    value: 'installNormalize',
+                    checked: true
+                },
+                {
+                    name: 'Zurb Foundation',
+                    value: 'installFoundation'
                 }
             ]
         },
@@ -101,6 +124,9 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
 
         this.installNormalize = props.features.indexOf('installNormalize') > -1;
         this.installFlexBoxGrid = props.features.indexOf('installFlexBoxGrid') > -1;
+        this.installFoundation = props.features.indexOf('installFoundation') > -1;
+        this.installCanJs = props.features.indexOf('installCanJs') > -1;
+        this.installJQuery = props.features.indexOf('installJQuery') > -1;
         cb();
     }.bind(this));
 };
