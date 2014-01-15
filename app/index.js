@@ -46,6 +46,11 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
             type: 'checkbox',
             choices: [
                 {
+                    name: 'Demo app',
+                    value: 'installDemo',
+                    checked: false
+                },
+                {
                     name: 'jQuery',
                     value: 'installJQuery',
                     checked: true
@@ -117,6 +122,7 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
         this.installFlexBoxGrid = props.features.indexOf('installFlexBoxGrid') > -1;
         this.installCanJs = props.features.indexOf('installCanJs') > -1;
         this.installJQuery = props.features.indexOf('installJQuery') > -1;
+        this.installDemo = props.features.indexOf('installDemo') > -1;
         cb();
     }.bind(this));
 };
@@ -134,30 +140,31 @@ CandlebarsGenerator.prototype.projectfiles = function projectfiles() {
 
 CandlebarsGenerator.prototype.scripts = function scripts() {
     this.mkdir('src/asset');
+
     this.copy('src/data/app.json', 'src/data/app.json');
 
+    this.copy('src/js/config.js', 'src/js/config.js');
     this.copy('src/js/_index.js', 'src/js/index.js');
     this.copy('src/js/app.js', 'src/js/'.concat(this.appName, '.js'));
     this.mkdir('src/js/'.concat(this.appName));
 
-    this.copy('src/js/config.js', 'src/js/config.js');
-
+    this.copy('src/less/_index.less', 'src/less/index.less');
     this.copy('src/less/_app.less', 'src/less/'.concat(this.appName, '.less'));
-    this.copy('src/less/app/_config.less', 'src/less/'.concat(this.appName, '/config.less'));
+    this.copy('src/less/_config.less', 'src/less/config.less');
 
     this.bulkDirectory('src/template', 'src/template');
 };
 
 CandlebarsGenerator.prototype.demo = function welcome() {
+    if (this.installDemo) {
+        this.copy('src/less/_index-demo.less', 'src/less/index.less');
+        this.copy('src/less/demo.less', 'src/less/demo.less');
 
-    this.copy('src/less/_index.less', 'src/less/index.less');
-
-    this.copy('src/less/demo.less', 'src/less/demo.less');
-    this.copy('src/less/demo/config.less', 'src/less/demo/config.less');
-
-    this.copy('src/js/demo.js', 'src/js/demo.js');
-    this.bulkDirectory('src/js/demo', 'src/js/demo');
-    this.bulkDirectory('src/js/nls', 'src/js/nls');
+        this.copy('src/js/_index-demo.js', 'src/js/index.js');
+        this.copy('src/js/demo.js', 'src/js/demo.js');
+        this.bulkDirectory('src/js/demo', 'src/js/demo');
+        this.bulkDirectory('src/js/nls', 'src/js/nls');
+    }
 };
 
 CandlebarsGenerator.prototype.runtime = function runtime() {
