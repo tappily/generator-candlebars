@@ -10,15 +10,18 @@ module.exports = function (grunt) {
         assemble: {
             options: {
                 assets: '<%%= connect.app.options.base %>/asset',
-                data: ['bower.json', 'src/data/**/*.json'],
+                data: ['bower.json', 'src/data/data.json'],
                 layoutdir: 'src/template/layout',
                 partials: 'src/template/partial/*.hbs',
                 layout: 'default.hbs',
                 flatten: true
             },
             index: {
+                options: {
+                    data: ['src/data/index/data.json']
+                },
                 files: {
-                    '<%%= connect.app.options.base %>/': ['src/template/page/*.hbs']
+                    '<%%= connect.app.options.base %>/': ['src/template/page/index.hbs']
                 }
             }
         },
