@@ -158,6 +158,7 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
     this.copy('src/less/_index.less', 'src/less/index.less');
     this.copy('src/less/_app.less', 'src/less/'.concat(this.appName, '.less'));
     this.copy('src/less/_config.less', 'src/less/config.less');
+    this.copy('src/less/app/layout.less', 'src/less/'.concat(this.appName, '/layout.less'));
 
     this.bulkDirectory('src/template', 'src/template');
 };

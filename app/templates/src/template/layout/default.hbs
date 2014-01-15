@@ -11,9 +11,16 @@
     <![endif]-->
     {{css styles}}
 </head>
-<body>
-{{> header }}
-{{> body }}
-{{js scripts}}
+<body class="layout">
+    <header class="header">
+        {{> header }}
+    </header>
+    <div class="body">
+        {{> body }}
+    </div>
+    <footer class="footer">
+        {{> footer }}
+    </footer>
+    {{js scripts}}
 </body>
 </html>
