@@ -56,6 +56,11 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
                     checked: true
                 },
                 {
+                    name: 'jQuery ++',
+                    value: 'installJQueryPP',
+                    checked: true
+                },
+                {
                     name: 'Flexbox grid',
                     value: 'installFlexBoxGrid',
                     checked: true
@@ -122,6 +127,7 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
         this.installFlexBoxGrid = props.features.indexOf('installFlexBoxGrid') > -1;
         this.installCanJs = props.features.indexOf('installCanJs') > -1;
         this.installJQuery = props.features.indexOf('installJQuery') > -1;
+        this.installJQueryPP = props.features.indexOf('installJQueryPP') > -1;
         this.installDemo = props.features.indexOf('installDemo') > -1;
         cb();
     }.bind(this));

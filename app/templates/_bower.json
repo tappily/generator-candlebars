@@ -26,7 +26,8 @@
         "canjs": "~2.0.4",
         "requirejs-i18n": "~2.0.4",
         "requirejs-text": "~2.0.10"<% if (installJQuery){ %>,
-        "jquery": "~2.0.3"<% } %><% if (installNormalize){ %>,
+        "jquery": "~2.0.3"<% } %><% if (installJQueryPP){ %>,
+        "jquerypp-release": "~1.0.1"<% } %><% if (installNormalize){ %>,
         "normalize-css": "~2.1.3"<% } %><% if (installFlexBoxGrid){ %>,
         "flexboxgrid": "https://github.com/kristoferjoseph/flexboxgrid.git#~0.1.0"<% } %>
     }
