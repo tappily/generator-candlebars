@@ -36,7 +36,7 @@ module.exports = function (grunt) {
                 expand: true,
                 flatten: true,
                 src: '.grunt/less/*.css',
-                dest: '<%%= assemble.options.assets %>/asset/css/'
+                dest: '<%%= assemble.options.assets %>/css/'
             }
         },
         bower: {
@@ -123,19 +123,14 @@ module.exports = function (grunt) {
                 strictUnits: true,
                 strictMath: true
             },
-            all: {
-                files: {
-                    '.grunt/less/all.css': 'src/less/index.less'
-                }
-            },
             app: {
                 files: {
                     '.grunt/less/<%%= pkg.name %>.css': 'src/less/<%%= pkg.name %>.less'
                 }
             },
-            demo: {
+            index: {
                 files: {
-                    '.grunt/less/demo.css': 'src/less/demo.less'
+                    '.grunt/less/index.css': 'src/less/index.less'
                 }
             }
         },
@@ -151,8 +146,8 @@ module.exports = function (grunt) {
             app: {
                 src: ['src/less/<%%= pkg.name %>.less']
             },
-            demo: {
-                src: ['src/less/demo.less']
+            index: {
+                src: ['src/less/index.less']
             }
         },
         release: {
@@ -198,7 +193,7 @@ module.exports = function (grunt) {
             },
             less: {
                 files: 'src/less/**/*.less',
-                tasks: ['lesslint', 'less:all', 'autoprefixer', 'copy:css']
+                tasks: ['lesslint', 'less', 'autoprefixer:site']
             },
             js: {
                 files: ['src/js/**/*.js'],
@@ -213,11 +208,11 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['bower']);
 
-    grunt.registerTask('test', ['jshint', 'lesslint:all']);
+    grunt.registerTask('test', ['jshint', 'lesslint:app']);
 
-    grunt.registerTask('build', ['clean', 'jshint', 'lesslint:app', 'less:app', 'autoprefixer:dist', 'requirejs:app']);
+    grunt.registerTask('build', ['clean', 'test', 'less:app', 'autoprefixer:dist', 'requirejs:app']);
 
-    grunt.registerTask('site', ['clean', 'jshint', 'lesslint', 'less:all', 'autoprefixer:site', 'requirejs:all', 'assemble', 'copy']);
+    grunt.registerTask('site', ['clean', 'jshint', 'lesslint', 'less', 'autoprefixer:site', 'requirejs:all', 'assemble', 'copy']);
 
     grunt.registerTask('live', ['site', 'connect:app', 'watch']);
 
