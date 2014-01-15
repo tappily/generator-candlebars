@@ -26,9 +26,17 @@ module.exports = function (grunt) {
             }
         },
         autoprefixer: {
-            less: {
+            dist: {
+                expand: true,
+                flatten: true,
                 src: '.grunt/less/*.css',
-                dest: 'dist/css/<%%= pkg.name %>.css'
+                dest: 'dist/css/'
+            },
+            site: {
+                expand: true,
+                flatten: true,
+                src: '.grunt/less/*.css',
+                dest: '<%%= assemble.options.assets %>/asset/css/'
             }
         },
         bower: {
@@ -210,9 +218,9 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', ['jshint', 'lesslint:all']);
 
-    grunt.registerTask('build', ['clean', 'jshint', 'lesslint:app', 'less:app', 'autoprefixer', 'requirejs:app']);
+    grunt.registerTask('build', ['clean', 'jshint', 'lesslint:app', 'less:app', 'autoprefixer:dist', 'requirejs:app']);
 
-    grunt.registerTask('site', ['clean', 'jshint', 'lesslint:all', 'less:all', 'autoprefixer', 'requirejs:all', 'assemble', 'copy']);
+    grunt.registerTask('site', ['clean', 'jshint', 'lesslint:all', 'less:all', 'autoprefixer:site', 'requirejs:all', 'assemble', 'copy']);
 
     grunt.registerTask('live', ['site', 'connect:app', 'watch']);
 
