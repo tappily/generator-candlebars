@@ -148,9 +148,6 @@ module.exports = function (grunt) {
                     }
                 ]
             },
-            all: {
-                src: ['src/less/index.less']
-            },
             app: {
                 src: ['src/less/<%%= pkg.name %>.less']
             },
@@ -220,7 +217,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', ['clean', 'jshint', 'lesslint:app', 'less:app', 'autoprefixer:dist', 'requirejs:app']);
 
-    grunt.registerTask('site', ['clean', 'jshint', 'lesslint:all', 'less:all', 'autoprefixer:site', 'requirejs:all', 'assemble', 'copy']);
+    grunt.registerTask('site', ['clean', 'jshint', 'lesslint', 'less:all', 'autoprefixer:site', 'requirejs:all', 'assemble', 'copy']);
 
     grunt.registerTask('live', ['site', 'connect:app', 'watch']);
 
