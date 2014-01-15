@@ -141,7 +141,8 @@ CandlebarsGenerator.prototype.projectfiles = function projectfiles() {
 CandlebarsGenerator.prototype.scripts = function scripts() {
     this.mkdir('src/asset');
 
-    this.copy('src/data/app.json', 'src/data/app.json');
+    this.copy('src/data/data.json', 'src/data/data.json');
+    this.copy('src/data/index/data.json', 'src/data/index/data.json');
 
     this.copy('src/js/config.js', 'src/js/config.js');
     this.copy('src/js/_index.js', 'src/js/index.js');

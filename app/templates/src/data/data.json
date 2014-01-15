@@ -1,6 +1,6 @@
 {
     "name": "<%= appTitle %>",
     "description": "<%= appDescription %>",
-    "scripts": ["index.js"],
-    "styles": ["index.css"]
+    "scripts": ["<%= appName %>.js"],
+    "styles": ["<%= appName %>.css"]
 }

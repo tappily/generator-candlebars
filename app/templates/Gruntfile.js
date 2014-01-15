@@ -10,16 +10,13 @@ module.exports = function (grunt) {
         assemble: {
             options: {
                 assets: '<%%= connect.app.options.base %>/asset',
-                data: ['bower.json'],
+                data: ['bower.json', 'src/data/**/*.json'],
                 layoutdir: 'src/template/layout',
-                partials: 'src/template/partial/*.hbs'
+                partials: 'src/template/partial/*.hbs',
+                layout: 'default.hbs',
+                flatten: true
             },
-            dist: {
-                options: {
-                    data: ['src/data/**/*.json'],
-                    layout: 'default.hbs',
-                    flatten: true
-                },
+            index: {
                 files: {
                     '<%%= connect.app.options.base %>/': ['src/template/page/*.hbs']
                 }
@@ -156,18 +153,18 @@ module.exports = function (grunt) {
                 mainConfigFile: 'src/js/config.js',
                 name: 'almond'
             },
-            index: {
-                options: {
-                    optimize: 'none',
-                    include: ['index'],
-                    out: '<%%= assemble.options.assets %>/js/index.js'
-                }
-            },
             app: {
                 options: {
                     optimize: 'none',
                     include: ['<%%= pkg.name %>'],
                     out: 'dist/js/<%%= pkg.name %>.js'
+                }
+            },
+            index: {
+                options: {
+                    optimize: 'none',
+                    include: ['index'],
+                    out: '<%%= assemble.options.assets %>/js/index.js'
                 }
             }
         },
@@ -179,7 +176,7 @@ module.exports = function (grunt) {
                 files: ['<%%= assemble.options.assets %>/**']
             },
             json: {
-                files: ['src/data/*.json'],
+                files: ['src/data/**/*.json'],
                 tasks: ['requirejs', 'assemble']
             },
             less: {
