@@ -64,34 +64,12 @@ module.exports = function (grunt) {
             }
         },
         copy: {
-            js: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'dist/',
-                        src: ['js/**'],
-                        dest: '<%%= connect.app.options.base %>/asset/',
-                        filter: 'isFile'
-                    }
-                ]
-            },
-            css: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: 'dist/',
-                        src: ['css/**'],
-                        dest: '<%%= connect.app.options.base %>/asset/',
-                        filter: 'isFile'
-                    }
-                ]
-            },
-            img: {
+            images: {
                 files: [
                     {
                         expand: true,
                         cwd: 'src/asset',
-                        src: ['img/**'],
+                        src: 'img/**',
                         dest: '<%%= connect.app.options.base %>/asset/',
                         filter: 'isFile'
                     }
@@ -162,11 +140,11 @@ module.exports = function (grunt) {
                 mainConfigFile: 'src/js/config.js',
                 name: 'almond'
             },
-            all: {
+            index: {
                 options: {
                     optimize: 'none',
                     include: ['index'],
-                    out: 'dist/js/index.js'
+                    out: '<%%= assemble.options.assets %>/js/index.js'
                 }
             },
             app: {
@@ -174,13 +152,6 @@ module.exports = function (grunt) {
                     optimize: 'none',
                     include: ['<%%= pkg.name %>'],
                     out: 'dist/js/<%%= pkg.name %>.js'
-                }
-            },
-            demo: {
-                options: {
-                    optimize: 'none',
-                    include: ['demo'],
-                    out: 'dist/js/demo.js'
                 }
             }
         },
@@ -197,11 +168,15 @@ module.exports = function (grunt) {
             },
             js: {
                 files: ['src/js/**/*.js'],
-                tasks: ['requirejs:all', 'copy:js']
+                tasks: ['requirejs']
+            },
+            images: {
+                files: ['src/asset/img/**'],
+                tasks: ['copy:images']
             },
             template: {
                 files: ['src/template/**/*.hbs'],
-                tasks: ['requirejs:all', 'assemble', 'copy']
+                tasks: ['requirejs', 'assemble']
             }
         }
     });
@@ -212,7 +187,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', ['clean', 'test', 'less:app', 'autoprefixer:dist', 'requirejs:app']);
 
-    grunt.registerTask('site', ['clean', 'jshint', 'lesslint', 'less', 'autoprefixer:site', 'requirejs:all', 'assemble', 'copy']);
+    grunt.registerTask('site', ['clean', 'jshint', 'lesslint', 'less', 'autoprefixer:site', 'requirejs', 'assemble', 'copy']);
 
     grunt.registerTask('live', ['site', 'connect:app', 'watch']);
 
