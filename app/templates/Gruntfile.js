@@ -172,11 +172,15 @@ module.exports = function (grunt) {
             }
         },
         watch: {
+            options: {
+                livereload: true
+            },
             assets: {
-                files: ['<%%= assemble.options.assets %>/**'],
-                options: {
-                    livereload: true
-                }
+                files: ['<%%= assemble.options.assets %>/**']
+            },
+            json: {
+                files: ['src/data/*.json'],
+                tasks: ['requirejs', 'assemble']
             },
             less: {
                 files: 'src/less/**/*.less',
