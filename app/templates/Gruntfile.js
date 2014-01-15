@@ -51,6 +51,22 @@ module.exports = function (grunt) {
             temp: ['.grunt'],
             dist: ['dist']
         },
+        compress: {
+            main: {
+                options: {
+                    archive: 'dist/archive.zip'
+                },
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%%= connect.app.options.base %>/',
+                        src: ['**'],
+                        dest: 'public/',
+                        filter: 'isFile'
+                    }
+                ]
+            }
+        },
         connect: {
             options: {
                 hostname: grunt.option('connect-hostname') || 'localhost'
@@ -192,4 +208,6 @@ module.exports = function (grunt) {
     grunt.registerTask('live', ['site', 'connect:app', 'watch']);
 
     grunt.registerTask('deploy', ['site', 'gh-pages']);
+
+    grunt.registerTask('archive', ['site', 'compress']);
 };
