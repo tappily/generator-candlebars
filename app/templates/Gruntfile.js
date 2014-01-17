@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         assemble: {
             options: {
                 assets: '<%%= connect.app.options.base %>/asset',
-                data: ['bower.json', 'src/data/data.json'],
+                data: ['bower.json', 'src/data/*.json'],
                 layoutdir: 'src/template/layout',
                 partials: 'src/template/partial/*.hbs',
                 layout: 'default.hbs',
