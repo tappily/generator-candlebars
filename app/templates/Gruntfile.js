@@ -42,7 +42,7 @@ module.exports = function (grunt) {
         bower: {
             all: {
                 options: {
-                    exclude: ['normalize-css', 'flexboxgrid']
+                    exclude: ['normalize-css', 'flexboxgrid', 'loopless']
                 },
                 rjsConfig: 'src/js/config.js'
             }
@@ -130,6 +130,11 @@ module.exports = function (grunt) {
         },
         lesslint: {
             options: {
+                csslint: {
+                    'known-properties': false,
+                    'box-sizing': false,
+                    'compatible-vendor-prefixes': false
+                },
                 formatters: [
                     {
                         id: 'csslint-xml',
