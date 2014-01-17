@@ -42,7 +42,7 @@ module.exports = function (grunt) {
         bower: {
             all: {
                 options: {
-                    exclude: ['normalize-css', 'flexboxgrid', 'loopless']
+                    exclude: ['normalize-css', 'flexboxgrid', 'loopless', 'rootless']
                 },
                 rjsConfig: 'src/js/config.js'
             }
