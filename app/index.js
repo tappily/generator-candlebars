@@ -147,8 +147,7 @@ CandlebarsGenerator.prototype.projectfiles = function projectfiles() {
 CandlebarsGenerator.prototype.scripts = function scripts() {
     this.mkdir('src/asset');
 
-    this.copy('src/data/_app.json', 'src/data/app.json');
-    this.copy('src/data/index/data.json', 'src/data/index/data.json');
+    this.copy('src/data/index/_data.json', 'src/data/index/data.json');
 
     this.copy('src/js/config.js', 'src/js/config.js');
     this.copy('src/js/_index.js', 'src/js/index.js');
@@ -160,7 +159,10 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
     this.copy('src/less/_config.less', 'src/less/config.less');
     this.copy('src/less/app/layout.less', 'src/less/'.concat(this.appName, '/layout.less'));
 
-    this.bulkDirectory('src/template', 'src/template');
+    this.bulkDirectory('src/template/layout', 'src/template/layout');
+    this.bulkDirectory('src/template/page', 'src/template/page');
+    this.copy('src/template/partial/footer.hbs', 'src/template/partial/footer.hbs');
+    this.copy('src/template/partial/header.hbs', 'src/template/partial/header.hbs');
 };
 
 CandlebarsGenerator.prototype.demo = function welcome() {
@@ -172,6 +174,8 @@ CandlebarsGenerator.prototype.demo = function welcome() {
         this.copy('src/js/demo.js', 'src/js/demo.js');
         this.bulkDirectory('src/js/demo', 'src/js/demo');
         this.bulkDirectory('src/js/nls', 'src/js/nls');
+
+        this.copy('src/template/partial/salutation.hbs', 'src/template/partial/salutation.hbs');
     }
 };
 

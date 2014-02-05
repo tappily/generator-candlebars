@@ -1,5 +1,6 @@
 {
     "title": "Put...the candle...APP!",
+    "description": "<%= appDescription %>",
     "scripts": ["index.js"],
     "styles": ["index.css"]
 }
