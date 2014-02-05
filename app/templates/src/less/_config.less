@@ -1,7 +1,9 @@
 <% if (installNormalize){ %>//deps
 @import (less) "../../bower_components/normalize-css/normalize.css";<% } %><% if (installFlexBoxGrid){ %>
-@import (less) "../../bower_components/flexboxgrid/css/flexboxgrid.css";<% } %>
+@import (less) "../../bower_components/flexboxgrid/css/flexboxgrid.css";<% } %><% if (installTypekit){ %>
+@import "tk";<% } %>
 @import "../../bower_components/loopless/src/less/loop";
 @import "../../bower_components/rootless/src/less/index";
-//vars
-@app-name: "<%= appName %>";
+@app-name: "<%= appName %>";<% if (installTypekit){ %>
+@tk-family: "<%= typekitFont %>";
+<% } %>

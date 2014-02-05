@@ -1,0 +1,4 @@
+{
+    "id":"<%= typekitId %>",
+    "host": "use.typekit.net"
+}

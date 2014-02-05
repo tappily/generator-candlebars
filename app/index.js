@@ -69,6 +69,11 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
                     name: 'Normalize css',
                     value: 'installNormalize',
                     checked: true
+                },
+                {
+                    name: 'Typekit',
+                    value: 'installTypekit',
+                    checked: true
                 }
             ]
         },
@@ -104,6 +109,21 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
             name: 'gitUser',
             message: 'Username/organization?',
             default: this.user.git.username
+        },
+        {
+            when: function (answers) {
+                return answers.features.indexOf('installTypekit') > -1;
+            },
+            name: 'typekitId',
+            message: 'Typekit ID?'
+        },
+        {
+            when: function (answers) {
+                return answers.features.indexOf('installTypekit') > -1;
+            },
+            name: 'typekitFont',
+            message: 'Typekit font name?',
+            default: 'Proxima Nova'
         }
     ];
 
@@ -111,6 +131,8 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
         this.appTitle = this._.humanize(props.appName);
         this.appName = this._.slugify(props.appName);
         this.appDescription = this._.stripTags(props.appDescription);
+        this.typekitId = this._.slugify(props.typekitId) || '';
+        this.typekitFont = this._.slugify(props.typekitFont) || '';
         this.gitUser = this._.slugify(props.gitUser) || '';
         this.git = props.git || '';
 
@@ -123,6 +145,7 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
             this.gitHome = this.gitRepo = this.gitBugs = '';
         }
 
+        this.installTypekit = props.features.indexOf('installTypekit') > -1;
         this.installNormalize = props.features.indexOf('installNormalize') > -1;
         this.installFlexBoxGrid = props.features.indexOf('installFlexBoxGrid') > -1;
         this.installCanJs = props.features.indexOf('installCanJs') > -1;
@@ -147,6 +170,10 @@ CandlebarsGenerator.prototype.projectfiles = function projectfiles() {
 CandlebarsGenerator.prototype.scripts = function scripts() {
     this.mkdir('src/asset');
 
+    if(this.installTypekit) {
+        this.copy('src/data/_typekit.json', 'src/data/typekit.json');
+        this.copy('src/less/tk.less', 'src/less/tk.less');
+    }
     this.copy('src/data/index/_data.json', 'src/data/index/data.json');
 
     this.copy('src/js/config.js', 'src/js/config.js');
