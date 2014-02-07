@@ -171,19 +171,22 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
     this.mkdir('src/asset');
 
     if(this.installTypekit) {
-        this.copy('src/data/_typekit.json', 'src/data/typekit.json');
+        this.copy('src/data/typekit.json', 'src/data/typekit.json');
         this.copy('src/less/tk.less', 'src/less/tk.less');
     }
-    this.copy('src/data/index/_data.json', 'src/data/index/data.json');
+    this.copy('src/data/index/data.json', 'src/data/index/data.json');
 
     this.copy('src/js/config.js', 'src/js/config.js');
-    this.copy('src/js/_index.js', 'src/js/index.js');
+    this.copy('src/js/index.js', 'src/js/index.js');
     this.copy('src/js/app.js', 'src/js/'.concat(this.appName, '.js'));
     this.mkdir('src/js/'.concat(this.appName));
 
-    this.copy('src/less/_index.less', 'src/less/index.less');
-    this.copy('src/less/_app.less', 'src/less/'.concat(this.appName, '.less'));
-    this.copy('src/less/_config.less', 'src/less/config.less');
+    this.copy('src/less/index.less', 'src/less/index.less');
+    this.copy('src/less/app.less', 'src/less/'.concat(this.appName, '.less'));
+    this.copy('src/less/config.less', 'src/less/config.less');
+
+    this.copy('src/less/app/config.less', 'src/less/'.concat(this.appName, '/config.less'));
+    this.copy('src/less/app/text.less', 'src/less/'.concat(this.appName, '/text.less'));
     this.copy('src/less/app/layout.less', 'src/less/'.concat(this.appName, '/layout.less'));
 
     this.bulkDirectory('src/template/layout', 'src/template/layout');
@@ -194,10 +197,10 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
 
 CandlebarsGenerator.prototype.demo = function welcome() {
     if (this.installDemo) {
-        this.copy('src/less/_index-demo.less', 'src/less/index.less');
+        this.copy('src/less/index-demo.less', 'src/less/index.less');
         this.copy('src/less/demo.less', 'src/less/demo.less');
 
-        this.copy('src/js/_index-demo.js', 'src/js/index.js');
+        this.copy('src/js/index-demo.js', 'src/js/index.js');
         this.copy('src/js/demo.js', 'src/js/demo.js');
         this.bulkDirectory('src/js/demo', 'src/js/demo');
         this.bulkDirectory('src/js/nls', 'src/js/nls');
