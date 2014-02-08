@@ -1,9 +1,11 @@
-@import "config";
-
+//imports
+@import "../config";
 //defaults
-@text-family: sans-serif;
-
-//init
+@text-family:sans-serif;
+//define
+.root();
 .text {
   font-family: @text-family;
+  .root-font-size(100%);
+  <% if (installTypekit){ %>.tk-variation(regular);<% } %>
 }

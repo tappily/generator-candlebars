@@ -19,19 +19,18 @@
         "node_modules",
         "bower_components",
         "test",
-        "tests"
-    ],
+        "tests"],
     "dependencies": {
-        "almond": "~0.2.7",
-        "canjs": "~2.0.4",
-        "loopless": "~1.0.0",
-        "rootless": "",
-        "requirejs-i18n": "~2.0.4",
-        "requirejs-text": "~2.0.10"<% if (installJQuery){ %>,
-        "jquery": "~2.0.3"<% } %><% if (installJQueryPP){ %>,
-        "jquerypp-release": "~1.0.1"<% } %><% if (installNormalize){ %>,
-        "normalize-css": "~2.1.3"<% } %><% if (installFlexBoxGrid){ %>,
-        "flexboxgrid": "https://github.com/kristoferjoseph/flexboxgrid.git#~0.1.0"<% } %>
+        "almond": "*",
+        "canjs": "*",
+        "loopless": "*",
+        "rootless": "*",
+        "requirejs-i18n": "*",
+        "requirejs-text": "*"<% if (installJQuery){ %>,
+        "jquery": "*"<% } %><% if (installJQueryPP){ %>,
+        "jquerypp-release": "*"<% } %><% if (installNormalize){ %>,
+        "normalize-css": "*"<% } %><% if (installFlexBoxGrid){ %>,
+        "flexboxgrid": "https://github.com/kristoferjoseph/flexboxgrid.git"<% } %>
     }
 }
 

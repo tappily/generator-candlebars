@@ -1,2 +1,9 @@
+<% if (importInline){ %>
+//inline vendor css
+@import "inline";<% } %>
+//import apps
 @import "<%= appName %>";
-@import "config";
+<% if (installDemo){ %>@import "demo";<% } %>
+//initialize apps
+<% if (installTypekit){ %>@text-family: <%= typekitFont %>, sans-serif;<% } %>
+

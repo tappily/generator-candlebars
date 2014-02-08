@@ -92,6 +92,21 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        csslint: {
+            options: {
+                csslintrc: '.csslintrc',
+                formatters: [
+                    {id: 'junit-xml', dest: 'report/csslint_junit.xml'},
+                    {id: 'csslint-xml', dest: 'report/csslint.xml'}
+                ]
+            },
+            site: {
+                src: ['<%%= autoprefixer.site.dest>*.css']
+            },
+            dist: {
+                src: ['<%%= autoprefixer.dist.dest>*.css']
+            }
+        },
         'gh-pages': {
             options: {
                 base: '<%%= connect.app.options.base %>'
@@ -126,27 +141,6 @@ module.exports = function (grunt) {
                 files: {
                     '.grunt/less/index.css': 'src/less/index.less'
                 }
-            }
-        },
-        lesslint: {
-            options: {
-                csslint: {
-                    'known-properties': false,
-                    'box-sizing': false,
-                    'compatible-vendor-prefixes': false
-                },
-                formatters: [
-                    {
-                        id: 'csslint-xml',
-                        dest: 'report/lesslint.xml'
-                    }
-                ]
-            },
-            app: {
-                src: ['src/less/<%%= pkg.name %>.less']
-            },
-            index: {
-                src: ['src/less/index.less']
             }
         },
         release: {
@@ -189,7 +183,7 @@ module.exports = function (grunt) {
             },
             less: {
                 files: 'src/less/**/*.less',
-                tasks: ['lesslint', 'less', 'autoprefixer:site']
+                tasks: ['less', 'autoprefixer:site', 'csslint:site']
             },
             js: {
                 files: ['src/js/**/*.js'],
@@ -208,11 +202,11 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['bower']);
 
-    grunt.registerTask('test', ['jshint', 'lesslint:app']);
+    grunt.registerTask('test', ['jshint']);
 
-    grunt.registerTask('build', ['clean', 'test', 'less:app', 'autoprefixer:dist', 'requirejs:app']);
+    grunt.registerTask('build', ['clean', 'test', 'less:app', 'autoprefixer:dist', 'csslint:dist', 'requirejs:app']);
 
-    grunt.registerTask('site', ['clean', 'jshint', 'lesslint', 'less', 'autoprefixer:site', 'requirejs', 'assemble', 'copy']);
+    grunt.registerTask('site', ['clean', 'jshint', 'less', 'autoprefixer:site', 'csslint:site', 'requirejs', 'assemble', 'copy']);
 
     grunt.registerTask('live', ['site', 'connect:app', 'watch']);
 

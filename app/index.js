@@ -152,6 +152,7 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
         this.installJQuery = props.features.indexOf('installJQuery') > -1;
         this.installJQueryPP = props.features.indexOf('installJQueryPP') > -1;
         this.installDemo = props.features.indexOf('installDemo') > -1;
+        this.importInline = (this.installNormalize || this.installFlexBoxGrid);
         cb();
     }.bind(this));
 };
@@ -165,6 +166,7 @@ CandlebarsGenerator.prototype.app = function app() {
 CandlebarsGenerator.prototype.projectfiles = function projectfiles() {
     this.copy('editorconfig', '.editorconfig');
     this.copy('jshintrc', '.jshintrc');
+    this.copy('csslintrc', '.csslintrc');
 };
 
 CandlebarsGenerator.prototype.scripts = function scripts() {
@@ -185,7 +187,10 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
     this.copy('src/less/app.less', 'src/less/'.concat(this.appName, '.less'));
     this.copy('src/less/config.less', 'src/less/config.less');
 
-    this.copy('src/less/app/config.less', 'src/less/'.concat(this.appName, '/config.less'));
+    if(this.importInline) {
+        this.copy('src/less/inline.less', 'src/less/inline.less');
+    }
+
     this.copy('src/less/app/text.less', 'src/less/'.concat(this.appName, '/text.less'));
     this.copy('src/less/app/layout.less', 'src/less/'.concat(this.appName, '/layout.less'));
 
@@ -197,9 +202,7 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
 
 CandlebarsGenerator.prototype.demo = function welcome() {
     if (this.installDemo) {
-        this.copy('src/less/index-demo.less', 'src/less/index.less');
         this.copy('src/less/demo.less', 'src/less/demo.less');
-
         this.copy('src/js/index-demo.js', 'src/js/index.js');
         this.copy('src/js/demo.js', 'src/js/demo.js');
         this.bulkDirectory('src/js/demo', 'src/js/demo');
