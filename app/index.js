@@ -48,7 +48,7 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
                 {
                     name: 'Demo app',
                     value: 'installDemo',
-                    checked: false
+                    checked: true
                 },
                 {
                     name: 'jQuery',
@@ -192,9 +192,6 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
         this.copy('src/less/inline.less', 'src/less/inline.less');
     }
 
-    this.copy('src/less/app/text.less', 'src/less/'.concat(this.appName, '/text.less'));
-    this.copy('src/less/app/layout.less', 'src/less/'.concat(this.appName, '/layout.less'));
-
     this.bulkDirectory('src/template/layout', 'src/template/layout');
     this.bulkDirectory('src/template/page', 'src/template/page');
     this.copy('src/template/partial/footer.hbs', 'src/template/partial/footer.hbs');
@@ -204,6 +201,9 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
 CandlebarsGenerator.prototype.demo = function welcome() {
     if (this.installDemo) {
         this.copy('src/less/demo.less', 'src/less/demo.less');
+        this.copy('src/less/demo/text.less', 'src/less/demo/text.less');
+        this.copy('src/less/demo/layout.less', 'src/less/demo/layout.less');
+
         this.copy('src/js/index-demo.js', 'src/js/index.js');
         this.copy('src/js/demo.js', 'src/js/demo.js');
         this.bulkDirectory('src/js/demo', 'src/js/demo');
