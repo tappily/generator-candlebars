@@ -46,7 +46,7 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
             type: 'checkbox',
             choices: [
                 {
-                    name: 'Demo app',
+                    name: 'Demo setup',
                     value: 'installDemo',
                     checked: true
                 },
