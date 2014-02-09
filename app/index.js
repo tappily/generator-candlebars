@@ -115,15 +115,16 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
                 return answers.features.indexOf('installTypekit') > -1;
             },
             name: 'typekitId',
-            message: 'Typekit ID?'
+            message: 'Typekit ID?',
+            default: 'wem0tgr'
         },
         {
             when: function (answers) {
                 return answers.features.indexOf('installTypekit') > -1;
             },
             name: 'typekitFont',
-            message: 'Typekit font name?',
-            default: 'Proxima Nova'
+            message: 'Typekit Font?',
+            default: 'Le Havre Rounded'
         }
     ];
 
