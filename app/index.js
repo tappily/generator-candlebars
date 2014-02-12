@@ -146,13 +146,19 @@ CandlebarsGenerator.prototype.askFor = function askFor() {
             this.gitHome = this.gitRepo = this.gitBugs = '';
         }
 
-        this.installTypekit = props.features.indexOf('installTypekit') > -1;
-        this.installNormalize = props.features.indexOf('installNormalize') > -1;
-        this.installFlexBoxGrid = props.features.indexOf('installFlexBoxGrid') > -1;
-        this.installCanJs = props.features.indexOf('installCanJs') > -1;
-        this.installJQuery = props.features.indexOf('installJQuery') > -1;
-        this.installJQueryPP = props.features.indexOf('installJQueryPP') > -1;
-        this.installDemo = props.features.indexOf('installDemo') > -1;
+        function setFeature(context, props, name) {
+            context[name] = props.features.indexOf(name) > -1;
+        }
+
+        setFeature(this, props, 'installJasmine');
+        setFeature(this, props, 'installTypekit');
+        setFeature(this, props, 'installNormalize');
+        setFeature(this, props, 'installFlexBoxGrid');
+        setFeature(this, props, 'installCanJs');
+        setFeature(this, props, 'installJQuery');
+        setFeature(this, props, 'installJQueryPP');
+        setFeature(this, props, 'installDemo');
+
         this.importInline = (this.installNormalize || this.installFlexBoxGrid);
         cb();
     }.bind(this));
@@ -206,6 +212,7 @@ CandlebarsGenerator.prototype.demo = function welcome() {
 
         this.copy('src/js/index-demo.js', 'src/js/index.js');
         this.copy('src/js/demo.js', 'src/js/demo.js');
+        this.bulkDirectory('spec', 'spec');
         this.bulkDirectory('src/js/demo', 'src/js/demo');
         this.bulkDirectory('src/js/nls', 'src/js/nls');
 

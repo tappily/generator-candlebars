@@ -1,9 +1,9 @@
 module.exports = function (grunt) {
     'use strict';
 
-    require('load-grunt-tasks')(grunt);
-
-    grunt.loadNpmTasks('assemble');
+    require('load-grunt-tasks')(grunt, {
+        pattern: ['grunt-*', 'assemble']
+    });
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -113,6 +113,27 @@ module.exports = function (grunt) {
             },
             src: '**/*'
         },
+        jasmine: {
+            options: {
+                specs: 'spec/**/*spec.js',
+                styles:['<%%= autoprefixer.dist.dest>*.css'],
+                template: require('grunt-template-jasmine-requirejs'),
+                templateOptions: {
+                    requireConfigFile: ['src/js/config.js']
+                }
+            },
+            spec: {
+                src: 'src/js/**/*.js'
+            },
+            report: {
+                src: 'src/js/**/*.js',
+                options: {
+                    junit: {
+                        path: 'report/junit'
+                    }
+                }
+            }
+        },
         jshint: {
             options: {
                 jshintrc: true
@@ -177,6 +198,14 @@ module.exports = function (grunt) {
             assets: {
                 files: ['<%%= assemble.options.assets %>/**']
             },
+            images: {
+                files: ['src/asset/img/**'],
+                tasks: ['copy:images']
+            },
+            js: {
+                files: ['src/js/**/*.js'],
+                tasks: ['jasmine:spec', 'requirejs']
+            },
             json: {
                 files: ['src/data/**/*.json'],
                 tasks: ['requirejs', 'assemble']
@@ -185,13 +214,9 @@ module.exports = function (grunt) {
                 files: 'src/less/**/*.less',
                 tasks: ['less', 'autoprefixer:site', 'csslint:site']
             },
-            js: {
-                files: ['src/js/**/*.js'],
-                tasks: ['requirejs']
-            },
-            images: {
-                files: ['src/asset/img/**'],
-                tasks: ['copy:images']
+            spec: {
+                files: ['spec/**/*.js'],
+                tasks: ['jasmine:spec']
             },
             template: {
                 files: ['src/template/**/*.hbs'],
