@@ -21,15 +21,15 @@
         "test",
         "tests"],
     "dependencies": {
-        "almond": "*",
-        "canjs": "*",
-        "loopless": "*",
-        "rootless": "*",
-        "requirejs-i18n": "*",
-        "requirejs-text": "*"<% if (installJQuery){ %>,
-        "jquery": "*"<% } %><% if (installJQueryPP){ %>,
-        "jquerypp-release": "*"<% } %><% if (installNormalize){ %>,
-        "normalize-css": "*"<% } %><% if (installFlexBoxGrid){ %>,
+        "almond": "",
+        "canjs": "",
+        "loopless": "",
+        "rootless": "",
+        "requirejs-i18n": "",
+        "requirejs-text": ""<% if (installJQuery){ %>,
+        "jquery": ""<% } %><% if (installJQueryPP){ %>,
+        "jquerypp-release": ""<% } %><% if (installNormalize){ %>,
+        "normalize-css": ""<% } %><% if (installFlexBoxGrid){ %>,
         "flexboxgrid": "https://github.com/kristoferjoseph/flexboxgrid.git"<% } %>
     }
 }

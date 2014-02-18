@@ -186,7 +186,9 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
     this.copy('src/data/index/data.json', 'src/data/index/data.json');
 
     this.copy('src/js/config.js', 'src/js/config.js');
-    this.copy('src/js/index.js', 'src/js/index.js');
+    if(!this.installDemo) {
+        this.copy('src/js/index.js', 'src/js/index.js');
+    }
     this.copy('src/js/app.js', 'src/js/'.concat(this.appName, '.js'));
     this.mkdir('src/js/'.concat(this.appName));
 
