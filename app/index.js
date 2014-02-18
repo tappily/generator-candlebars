@@ -181,7 +181,7 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
 
     if(this.installTypekit) {
         this.copy('src/data/typekit.json', 'src/data/typekit.json');
-        this.copy('src/less/tk.less', 'src/less/tk.less');
+        this.copy('src/less/utility/tk.less', 'src/less/utility/tk.less');
     }
     this.copy('src/data/index/data.json', 'src/data/index/data.json');
 
@@ -194,10 +194,10 @@ CandlebarsGenerator.prototype.scripts = function scripts() {
 
     this.copy('src/less/index.less', 'src/less/index.less');
     this.copy('src/less/app.less', 'src/less/'.concat(this.appName, '.less'));
-    this.copy('src/less/config.less', 'src/less/config.less');
+    this.copy('src/less/utility/config.less', 'src/less/utility/config.less');
 
     if(this.importInline) {
-        this.copy('src/less/inline.less', 'src/less/inline.less');
+        this.copy('src/less/utility/inline.less', 'src/less/utility/inline.less');
     }
 
     this.bulkDirectory('src/template/layout', 'src/template/layout');

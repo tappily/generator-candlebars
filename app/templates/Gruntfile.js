@@ -153,15 +153,12 @@ module.exports = function (grunt) {
                 strictUnits: true,
                 strictMath: true
             },
-            app: {
-                files: {
-                    '.grunt/less/<%%= pkg.name %>.css': 'src/less/<%%= pkg.name %>.less'
-                }
-            },
-            index: {
-                files: {
-                    '.grunt/less/index.css': 'src/less/index.less'
-                }
+            files: {
+                expand: true,
+                cwd: 'src/less/',
+                src: ['*.less'],
+                dest: '.grunt/less/',
+                ext: '.css'
             }
         },
         release: {
@@ -229,7 +226,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', ['jshint']);
 
-    grunt.registerTask('build', ['clean', 'test', 'less:app', 'autoprefixer:dist', 'csslint:dist', 'requirejs:app']);
+    grunt.registerTask('build', ['clean', 'test', 'less', 'autoprefixer:dist', 'csslint:dist', 'requirejs:app']);
 
     grunt.registerTask('site', ['clean', 'jshint', 'less', 'autoprefixer:site', 'csslint:site', 'requirejs', 'assemble', 'copy']);
 
