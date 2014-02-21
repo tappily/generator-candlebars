@@ -18,7 +18,7 @@ module.exports = function (grunt) {
             },
             index: {
                 options: {
-                    data: ['src/data/index/data.json']
+                    data: ['src/data/index/*.json']
                 },
                 files: {
                     '<%%= connect.app.options.base %>/': ['src/template/page/index.hbs']
